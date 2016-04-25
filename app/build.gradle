@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.xujian.joke"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            //混淆开关
+            minifyEnabled false
+            //是否zip对齐
+            zipAlignEnabled false
+            //是否打开debuggable开关
+            debuggable false
+            //是否打开jniDebuggable开关
+            jniDebuggable false
+            //混淆配置文件
+            proguardFiles  'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.facebook.fresco:fresco:0.9.0+'
+    compile project(':utilitylib')
+}

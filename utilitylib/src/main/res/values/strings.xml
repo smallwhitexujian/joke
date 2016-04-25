@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Utilitylib</string>
+    <string name="gps_noPermission">没有获取位置权限</string>
+</resources>
