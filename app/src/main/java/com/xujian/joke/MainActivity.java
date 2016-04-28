@@ -59,30 +59,30 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-//        new AsyncTask<Void, Void, Boolean>() {
-//            @Override
-//            protected Boolean doInBackground(Void... params) {
-//                try {
-//                    Ads.init(MainActivity.this, AppState.APP_ID, AppState.SECRET_KEY);
-//                    return true;
-//                } catch (Exception e) {
-//                    Log.e("ads-sample", "error", e);
-//                    return false;
-//                }
-//            }
-//
-//            @Override
-//            protected void onPostExecute(Boolean success) {
-//                if (success) {
-//                    Ads.preLoad(AppState.BANNER, Ads.AdFormat.banner);
-//                    View bannerView = Ads.createBannerView(MainActivity.this, AppState.BANNER);
-//                    linearLayout.addView(bannerView, new ViewGroup.LayoutParams(
-//                            ViewGroup.LayoutParams.MATCH_PARENT,
-//                            ViewGroup.LayoutParams.WRAP_CONTENT
-//                    ));
-//                }
-//            }
-//        }.execute();
+        new AsyncTask<Void, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                try {
+                    Ads.init(MainActivity.this, AppState.APP_ID, AppState.SECRET_KEY);
+                    return true;
+                } catch (Exception e) {
+                    Log.e("ads-sample", "error", e);
+                    return false;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                if (success) {
+                    Ads.preLoad(AppState.BANNER, Ads.AdFormat.banner);
+                    View bannerView = Ads.createBannerView(MainActivity.this, AppState.BANNER);
+                    linearLayout.addView(bannerView, new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    ));
+                }
+            }
+        }.execute();
     }
 
     @Override

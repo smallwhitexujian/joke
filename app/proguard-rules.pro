@@ -112,8 +112,11 @@
 -keepattributes Signature
 -keep class com.wandoujia.ads.sdk.** { *; }
 -dontwarn com.wandoujia.ads.sdk.**
+-keepattributes Signature
 -dontwarn android.support.**
 -dontwarn com.squareup.**
+-dontwarn okio.**
+-keep class com.wandoujia.ads.sdk.** { *; }
 
 ##okhttp
 -dontwarn okhttp3.**
@@ -127,7 +130,7 @@
 
 
 # ProGuard configurations for NetworkBench Lens
-#-keep class com.networkbench.** { *; }
-#-dontwarn com.networkbench.**
-#-keepattributes Exceptions, Signature, InnerClasses
+-keep class com.networkbench.** { *; }
+-dontwarn com.networkbench.**
+-keepattributes Exceptions, Signature
 # End NetworkBench Lens
