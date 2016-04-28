@@ -2,6 +2,9 @@ package com.xujian.joke.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.xujian.joke.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.xujian.joke.R.mipmap.ic_launcher;
 
 /**
  * Created by:      xujian
@@ -75,6 +80,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     mContext.startActivity(intent);
                 }
             });
+        }else{
+            Drawable d = mContext.getResources().getDrawable(R.mipmap.ic_launcher);
+            holder.frescoDrawee.setDefutImage(d);
         }
     }
 

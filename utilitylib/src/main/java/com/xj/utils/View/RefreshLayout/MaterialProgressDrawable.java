@@ -46,7 +46,6 @@ import java.util.ArrayList;
 /**
  * Fancy progress indicator for Material theme.
  *
- * @hide 
  */
 class MaterialProgressDrawable extends Drawable implements Animatable {
     private static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
@@ -110,6 +109,22 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
     public MaterialProgressDrawable(Context context, View parent) {
         mParent = parent;
         mResources = context.getResources();
+        Callback mCallback = new Callback() {
+            @Override
+            public void invalidateDrawable(Drawable d) {
+                invalidateSelf();
+            }
+
+            @Override
+            public void scheduleDrawable(Drawable d, Runnable what, long when) {
+                scheduleSelf(what, when);
+            }
+
+            @Override
+            public void unscheduleDrawable(Drawable d, Runnable what) {
+                unscheduleSelf(what);
+            }
+        };
         mRing = new Ring(mCallback);
         mRing.setColors(mColors);
 
@@ -193,7 +208,6 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
      * The first color will also be the color of the bar that grows in response
      * to a user swipe gesture.
      *
-     * @param colors
      */
     public void setColorSchemeColors(int... colors) {
         mRing.setColors(colors);
@@ -380,23 +394,6 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
         mFinishAnimation = finishRingAnimation;
         mAnimation = animation;
     }
-
-    private final Callback mCallback = new Callback() {
-        @Override
-        public void invalidateDrawable(Drawable d) {
-            invalidateSelf();
-        }
-
-        @Override
-        public void scheduleDrawable(Drawable d, Runnable what, long when) {
-            scheduleSelf(what, when);
-        }
-
-        @Override
-        public void unscheduleDrawable(Drawable d, Runnable what) {
-            unscheduleSelf(what);
-        }
-    };
 
     private static class Ring {
         private final RectF mTempBounds = new RectF();

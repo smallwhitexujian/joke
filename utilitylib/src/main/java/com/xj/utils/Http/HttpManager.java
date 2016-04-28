@@ -31,11 +31,9 @@ public class HttpManager {
     private static void init() {
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .detectDiskReads().detectDiskWrites().detectNetwork()
-//                .penaltyLog()
                 .build());
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
                 .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-//                .penaltyLog()
                 .penaltyDeath().build());
     }
 
@@ -75,7 +73,7 @@ public class HttpManager {
             @Override
             public void onFailure(Call call, IOException e) {
 //                    callback.onFailure(call, e);
-                ToastUtils.showToast(mActivity,"error"+e);
+//                ToastUtils.showToast(mActivity,"error"+e);
             }
 
             @Override
