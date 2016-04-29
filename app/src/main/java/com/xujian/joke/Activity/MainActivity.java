@@ -1,4 +1,4 @@
-package com.xujian.joke;
+package com.xujian.joke.Activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +15,10 @@ import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
 import com.xj.utils.utils.DebugLogs;
 import com.xujian.joke.Adapter.SectionsPagerAdapter;
+import com.xujian.joke.AppState;
+import com.xujian.joke.Fragment.FunnyFragment;
+import com.xujian.joke.Fragment.JokeFragment;
+import com.xujian.joke.R;
 
 import java.util.ArrayList;
 

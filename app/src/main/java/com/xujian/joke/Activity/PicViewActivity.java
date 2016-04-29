@@ -1,12 +1,12 @@
-package com.xujian.joke;
+package com.xujian.joke.Activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.xj.frescolib.View.FrescoDrawee;
+import com.xujian.joke.R;
 import com.xujian.joke.Utils.FrescoBitmapUtils;
 import com.xujian.joke.Utils.ImageTouchView;
 

@@ -2,9 +2,6 @@ package com.xujian.joke.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,7 @@ import android.widget.TextView;
 import com.xj.frescolib.View.FrescoDrawee;
 import com.xj.utils.utils.DebugLogs;
 import com.xujian.joke.Model.JokeModel;
-import com.xujian.joke.PicViewActivity;
+import com.xujian.joke.Activity.PicViewActivity;
 import com.xujian.joke.R;
 
 import java.util.ArrayList;

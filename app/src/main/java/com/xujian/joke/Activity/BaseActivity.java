@@ -1,4 +1,4 @@
-package com.xujian.joke;
+package com.xujian.joke.Activity;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+
+import com.xujian.joke.DemoApi;
 
 import java.lang.ref.WeakReference;
 

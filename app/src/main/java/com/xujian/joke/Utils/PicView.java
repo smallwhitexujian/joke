@@ -1,4 +1,4 @@
-package com.xujian.joke;
+package com.xujian.joke.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

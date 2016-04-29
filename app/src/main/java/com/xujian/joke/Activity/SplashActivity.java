@@ -1,4 +1,4 @@
-package com.xujian.joke;
+package com.xujian.joke.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
+import com.xujian.joke.AppState;
+import com.xujian.joke.R;
 
 /**
  * Created by:      xujian

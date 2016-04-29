@@ -1,4 +1,4 @@
-package com.xujian.joke;
+package com.xujian.joke.Fragment;
 
 import android.os.Bundle;
 import android.os.Message;
@@ -12,7 +12,9 @@ import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;
 import com.xj.utils.utils.DebugLogs;
 import com.xujian.joke.Adapter.RecyclerViewAdapter;
+import com.xujian.joke.DemoApi;
 import com.xujian.joke.Model.JokeModel;
+import com.xujian.joke.R;
 import com.xujian.joke.Utils.SharePreferenceUtils;
 
 import java.util.ArrayList;

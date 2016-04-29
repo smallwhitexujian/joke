@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.xj.frescolib.View.FrescoDrawee;
 import com.xj.utils.utils.DebugLogs;
 import com.xujian.joke.Model.FunnyPic;
-import com.xujian.joke.PicViewActivity;
+import com.xujian.joke.Activity.PicViewActivity;
 import com.xujian.joke.R;
 
 import java.util.ArrayList;
