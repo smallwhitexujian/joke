@@ -3,6 +3,7 @@ package com.xujian.joke;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.xj.frescolib.View.FrescoDrawee;

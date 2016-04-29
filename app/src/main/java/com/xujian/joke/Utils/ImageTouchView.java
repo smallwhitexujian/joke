@@ -53,7 +53,6 @@ public class ImageTouchView extends ImageView {
                 startPoint.set(event.getX(),event.getY());//开始点
                 break;
             case MotionEvent.ACTION_MOVE://移动事件
-
                 if (mode == DRAG) {//图片拖动事件
                     float dx = event.getX() - startPoint.x;//x轴移动距离
                     float dy = event.getY() - startPoint.y;
@@ -68,8 +67,6 @@ public class ImageTouchView extends ImageView {
                         matrix.set(currentMaritx);
                         matrix.postScale(scale, scale, midPoint.x, midPoint.y);
                     }
-
-
                 }
                 break;
 
@@ -83,13 +80,12 @@ public class ImageTouchView extends ImageView {
             //当屏幕上已经有触点（手指）,再有一个手指压下屏幕
             case MotionEvent.ACTION_POINTER_DOWN:
                 mode = ZOOM;
+                setScaleType(ScaleType.MATRIX);
                 startDis = distance(event);
-
                 if(startDis > 10f){//避免手指上有两个茧
                     midPoint = mid(event);
                     currentMaritx.set(this.getImageMatrix());//记录当前的缩放倍数
                 }
-
                 break;
         }
         this.setImageMatrix(matrix);
