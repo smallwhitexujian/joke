@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;
 import com.xj.utils.utils.DebugLogs;
-import com.xujian.joke.Adapter.RecyclerViewAdapter;
+import com.xujian.joke.Adapter.QiWenNewAdapter;
 import com.xujian.joke.DemoApi;
-import com.xujian.joke.Model.JokeModel;
+import com.xujian.joke.Model.QiWenNew;
 import com.xujian.joke.R;
 import com.xujian.joke.Utils.SharePreferenceUtils;
 
@@ -22,33 +22,33 @@ import java.util.ArrayList;
 /**
  * Created by:      xujian
  * Version          ${version}
- * Date:            16/4/17
+ * Date:            16/4/29
  * Description(描述):
  * Modification  History(历史修改):
  * Date              Author          Version
  * ---------------------------------------------------------
- * 16/4/17          xujian         ${version}
+ * 16/4/29          xujian         ${version}
  * Why & What is modified(修改原因):
  */
-public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnRefreshListener {
+public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
-    private ArrayList<JokeModel> listData = new ArrayList<>();
-    private RecyclerViewAdapter adapter;
+    private ArrayList<QiWenNew> listData = new ArrayList<>();
+    private QiWenNewAdapter adapter;
     private SwipyRefreshLayout mSwipyRefreshLayout;
     protected DemoApi demoApi;
     private int pageNum = 0;
     private boolean ispull = false;
     private SharePreferenceUtils sp;
 
-    public JokeFragment() {
+    public QiWenNewFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static JokeFragment newInstance() {
-        JokeFragment fragment = new JokeFragment();
+    public static QiWenNewFragment newInstance() {
+        QiWenNewFragment fragment = new QiWenNewFragment();
         return fragment;
     }
 
@@ -56,11 +56,11 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
     protected void doFragmentHandler(Message msg) {
         super.doFragmentHandler(msg);
         switch (msg.what) {
-            case DemoApi.JOKESUCCESS:
+            case DemoApi.QIWENNEW://奇闻新闻
                 if (!ispull) {
-                    listData = (ArrayList<JokeModel>) msg.obj;
+                    listData = (ArrayList<QiWenNew>) msg.obj;
                 } else {
-                    listData.addAll((ArrayList<JokeModel>) msg.obj);
+                    listData.addAll((ArrayList<QiWenNew>) msg.obj);
                 }
                 DebugLogs.d("----->" + listData.size());
                 sp.putJokecount(pageNum);
@@ -84,13 +84,13 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
         demoApi = new DemoApi(getActivity(), fragmentHandler);
         sp = SharePreferenceUtils.getmInstance(getActivity());
         pageNum = sp.getJokeCount();
-        getJokeData();
+        getData();
     }
 
     private void initView(View rootView) {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new RecyclerViewAdapter(getActivity(), listData);
+        adapter = new QiWenNewAdapter(getActivity(), listData);
         mRecyclerView.setAdapter(adapter);
         mSwipyRefreshLayout = (SwipyRefreshLayout) rootView.findViewById(R.id.pullToRefreshView);
         mSwipyRefreshLayout.setOnRefreshListener(this);
@@ -100,12 +100,9 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
     /**
      * 获取JOKE数据
      */
-    private void getJokeData() {
+    private void getData() {
         ispull = false;
-        if (pageNum == 0) {
-            sp.putJokecount(0);
-        }
-        demoApi.getJoke(sp.getJokeCount());
+        demoApi.getQiWenNew(0);
     }
 
     @Override
@@ -114,12 +111,11 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
             @Override
             public void run() {
                 if (direction == SwipyRefreshLayoutDirection.TOP) {
-                    ispull = false;
-                    getJokeData();
+                    getData();
                 } else {
                     ispull = true;
                     pageNum++;
-                    demoApi.getJoke(pageNum);
+                    demoApi.getQiWenNew(pageNum);
                 }
             }
         });

@@ -16,6 +16,7 @@ import java.util.List;
 public class CommonListModel<T> extends CommonModel {
     public List<T> detail;
     public List<T> data;
+    public List<T> result;
 
     public boolean hasDetail() {
         return detail != null && detail.size() > 0;

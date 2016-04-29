@@ -3,6 +3,7 @@ package com.xujian.joke;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DebugUtils;
 
 import com.google.gson.reflect.TypeToken;
 import com.xj.utils.Http.HttpManager;
@@ -12,6 +13,7 @@ import com.xujian.joke.Model.CommonListModel;
 import com.xujian.joke.Model.CommonModel;
 import com.xujian.joke.Model.FunnyPic;
 import com.xujian.joke.Model.JokeModel;
+import com.xujian.joke.Model.QiWenNew;
 
 import java.util.List;
 
@@ -28,15 +30,19 @@ import java.util.List;
  */
 public class DemoApi {
     private static final String key = "e74a8ac6e637ba28cd9bab4ffdbdb1cb";//聚合的key
+    private static final String AF_key = "2aef0c4557254305ba4824857c533839";//聚合的key
     private static final String JH_FUNNY = "http://japi.juhe.cn/joke/content/list.from";//聚合笑话地址
     private static final String JH_FUNNYPIC = "http://japi.juhe.cn/joke/img/text.from";//聚合笑话地址
-    private String JOKEAPI = "http://api.1-blog.com/biz/bizserver/xiaohua/list.do?size=20";
+    private static final String AF_NEWQIWEN = "http://api.avatardata.cn/QiWenNews/Query";//阿凡达数据
+    private static final String JOKEAPI = "http://api.1-blog.com/biz/bizserver/xiaohua/list.do?size=20";//野笑话地址
 
     private String JH_Funny = JH_FUNNY + "?key=" + key;
     private String JH_FunnyPic = JH_FUNNYPIC + "?key=" + key;
+    private String AF_QiWenNew = AF_NEWQIWEN + "?key=" + AF_key;
     public static final int API = 0X88;
     public static final int JOKESUCCESS = API + 1;
     public static final int FUNNYPIC = API + 2;
+    public static final int QIWENNEW = API + 3;
 
     private HttpManager.CallBack callBack;
     private Activity mContext;
@@ -114,5 +120,28 @@ public class DemoApi {
             }
         };
         HttpManager.Request(mContext, HttpManager.Method.GET, FunnyPic, callBack, null);
+    }
+    /**
+     * 奇闻新闻
+     * @param page 页数
+     */
+    public void getQiWenNew(int page) {
+        String qiwen = AF_QiWenNew + "&page=" + page + "&rows=20";
+        callBack = new HttpManager.CallBack() {
+            @Override
+            public void onSuccess(String result) {
+                if (!result.isEmpty()) {
+                    CommonListModel<QiWenNew> commonModel = JsonUtil.fromJson(result, new TypeToken<CommonListModel<QiWenNew>>() {
+                    }.getType());
+                    if (commonModel != null && commonModel.error_code.equals("0")) {
+                        Message message = mHandler.obtainMessage();
+                        message.what = QIWENNEW;
+                        message.obj = commonModel.result;
+                        mHandler.sendMessage(message);
+                    }
+                }
+            }
+        };
+        HttpManager.Request(mContext, HttpManager.Method.GET, qiwen, callBack, null);
     }
 }

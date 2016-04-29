@@ -60,7 +60,7 @@ public class FunnyFragment extends BaseFragment implements SwipyRefreshLayout.On
                 } else {
                     listData.addAll((ArrayList<FunnyPic.contentData>) msg.obj);
                 }
-                DebugLogs.d("----->" + listData.size());
+                mSwipyRefreshLayout.setRefreshing(false);
                 adapter.addData(listData);
                 break;
         }
@@ -103,13 +103,11 @@ public class FunnyFragment extends BaseFragment implements SwipyRefreshLayout.On
             @Override
             public void run() {
                 if (direction == SwipyRefreshLayoutDirection.TOP) {
-                    mSwipyRefreshLayout.setRefreshing(false);
                     getFunnyData();
                 } else {
                     ispull = true;
                     pageNum++;
                     demoApi.getFunnyPic(pageNum);
-                    mSwipyRefreshLayout.setRefreshing(false);
                 }
             }
         });

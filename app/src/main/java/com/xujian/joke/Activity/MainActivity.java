@@ -1,13 +1,10 @@
 package com.xujian.joke.Activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.qq.e.ads.banner.ADSize;
@@ -18,18 +15,14 @@ import com.xujian.joke.Adapter.SectionsPagerAdapter;
 import com.xujian.joke.AppState;
 import com.xujian.joke.Fragment.FunnyFragment;
 import com.xujian.joke.Fragment.JokeFragment;
+import com.xujian.joke.Fragment.QiWenNewFragment;
 import com.xujian.joke.R;
 
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
-    private String[] mTitle = {"笑话","搞笑图片"};
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
+    private String[] mTitle = {"笑话","搞笑图片","奇闻怪谈"};
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
-    private Fragment jokeFragment,funnyfragment;
-    private ViewGroup linearLayout;
-    private BannerView bannerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +33,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initBanner() {
-        linearLayout = (ViewGroup)findViewById(R.id.ads);
-        bannerView = new BannerView(this, ADSize.BANNER, AppState.APPID,AppState.BannerPosID);
+        ViewGroup linearLayout = (ViewGroup)findViewById(R.id.ads);
+        BannerView bannerView = new BannerView(this, ADSize.BANNER, AppState.APPID,AppState.BannerPosID);
         // 广告请求数据，可以设置广告轮播时间，默认为30s
         //在banner广告上展示关闭按钮
         bannerView.setRefresh(10);
@@ -58,6 +51,7 @@ public class MainActivity extends BaseActivity {
                 DebugLogs.i("AD_DEMO"+"ONBannerReceive");
             }
         });
+        assert linearLayout != null;
         linearLayout.addView(bannerView);
         bannerView.loadAD();
 
@@ -65,29 +59,22 @@ public class MainActivity extends BaseActivity {
 
     private void initview() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("笑话");
-        jokeFragment = JokeFragment.newInstance();
-        funnyfragment = FunnyFragment.newInstance();
+        if (toolbar != null) {
+            toolbar.setTitle("笑话");
+        }
+        Fragment jokeFragment = JokeFragment.newInstance();
+        Fragment funnyfragment = FunnyFragment.newInstance();
+        Fragment qiwenfragment = QiWenNewFragment.newInstance();
         fragmentArrayList.add(jokeFragment);
         fragmentArrayList.add(funnyfragment);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),mTitle,fragmentArrayList);
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        fragmentArrayList.add(qiwenfragment);
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),mTitle,fragmentArrayList);
+        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        assert mViewPager != null;
         mViewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        assert tabLayout != null;
         tabLayout.setupWithViewPager(mViewPager);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setVisibility(View.GONE);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }
