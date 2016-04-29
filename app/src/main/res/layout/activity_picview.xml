@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="true"
+    android:gravity="center"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -11,7 +12,13 @@
         android:id="@+id/picture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fresco:actualImageScaleType="fitCenter"/>
+        fresco:actualImageScaleType="fitCenter"
+        android:visibility="gone"/>
 
-
+    <com.xujian.joke.Utils.ImageTouchView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:scaleType="matrix" />
 </LinearLayout>
