@@ -134,3 +134,10 @@
 -dontwarn com.networkbench.**
 -keepattributes Exceptions, Signature
 # End NetworkBench Lens
+
+-keep class com.qq.e.** {
+   public protected *;
+   }
+   -keep class android.support.v4.app.NotificationCompat**{
+   public *;
+   }

@@ -20,8 +20,6 @@ import com.xujian.joke.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.xujian.joke.R.mipmap.ic_launcher;
-
 /**
  * Created by:      xujian
  * Version          ${version}
@@ -68,7 +66,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ListItemViewHolder holder, final int position) {
         holder.title.setText(mList.get(position).author);
         holder.context.setText(mList.get(position).content);
-        DebugLogs.d("------>" + mList.get(position).picUrl);
         if (!mList.get(position).picUrl.equals("")) {
             holder.frescoDrawee.setVisibility(View.VISIBLE);
             holder.frescoDrawee.setImageURI(mList.get(position).picUrl);
@@ -80,9 +77,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     mContext.startActivity(intent);
                 }
             });
-        }else{
-            Drawable d = mContext.getResources().getDrawable(R.mipmap.ic_launcher);
-            holder.frescoDrawee.setDefutImage(d);
         }
     }
 
