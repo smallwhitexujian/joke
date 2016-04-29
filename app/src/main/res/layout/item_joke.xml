@@ -27,7 +27,8 @@
             android:paddingTop="10dp"
             android:text="@string/Joke_title"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="normal"/>
 
         <TextView
             android:id="@+id/jokeContent"
