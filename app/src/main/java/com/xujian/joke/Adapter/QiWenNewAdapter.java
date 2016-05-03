@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.xj.frescolib.View.FrescoDrawee;
 import com.xujian.joke.Activity.WebActivity;
 import com.xujian.joke.Model.QiWenNew;
+import com.xujian.joke.Model.WEIXINGJX;
 import com.xujian.joke.R;
 
 import java.util.ArrayList;
@@ -29,22 +30,22 @@ import java.util.List;
  * Why & What is modified(修改原因):
  */
 public class QiWenNewAdapter extends RecyclerView.Adapter<QiWenNewAdapter.ListItemViewHolder> {
-    private List<QiWenNew> mList  = new ArrayList<>();
+    private List<WEIXINGJX> mList  = new ArrayList<>();
     private Context mContext;
 
-    public QiWenNewAdapter(Context context, List<QiWenNew> data) {
+    public QiWenNewAdapter(Context context, List<WEIXINGJX> data) {
         if (data == null) {
             throw new IllegalArgumentException("model Data must not be null");
         }
         this.mContext = context;
         mList = data;
     }
-    public void addData(List<QiWenNew> data) {
+    public void addData(List<WEIXINGJX> data) {
         mList = data;
         notifyDataSetChanged();
     }
 
-    public void addOneData(QiWenNew funnyPic) {
+    public void addOneData(WEIXINGJX funnyPic) {
         mList.add(mList.size(), funnyPic);
         notifyItemInserted(mList.size());
     }
@@ -63,7 +64,7 @@ public class QiWenNewAdapter extends RecyclerView.Adapter<QiWenNewAdapter.ListIt
     public void onBindViewHolder(ListItemViewHolder holder, final int position) {
         holder.title.setText(mList.get(position).title);
         holder.context.setText(mList.get(position).description);
-        holder.time.setText(mList.get(position).ctime);
+        holder.time.setText(mList.get(position).hottime);
         if (!mList.get(position).url.equals("")) {
             holder.frescoDrawee.setVisibility(View.VISIBLE);
             holder.frescoDrawee.setImageURI(mList.get(position).picUrl);

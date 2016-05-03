@@ -1,6 +1,7 @@
 package com.xj.utils.GpsTracker;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import java.util.List;
  * GPS定位以及转换为地理位置名称
  */
 public class GpsTracker extends Service implements LocationListener {
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private Context mcontext;
     //标记GSP状态
     private boolean isGPSEnabled = false;
@@ -47,6 +50,10 @@ public class GpsTracker extends Service implements LocationListener {
         this.mcontext = context;
         getLocation();
     }
+
+
+
+
 
     public Location getLocation() {
         try {

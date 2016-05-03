@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;
-import com.xj.utils.utils.DebugLogs;
 import com.xujian.joke.Adapter.QiWenNewAdapter;
 import com.xujian.joke.DemoApi;
-import com.xujian.joke.Model.QiWenNew;
+import com.xujian.joke.Model.WEIXINGJX;
 import com.xujian.joke.R;
-import com.xujian.joke.Utils.SharePreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -30,25 +28,25 @@ import java.util.ArrayList;
  * 16/4/29          xujian         ${version}
  * Why & What is modified(修改原因):
  */
-public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout.OnRefreshListener {
+public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
-    private ArrayList<QiWenNew> listData = new ArrayList<>();
+    private ArrayList<WEIXINGJX> listData = new ArrayList<>();
     private QiWenNewAdapter adapter;
     private SwipyRefreshLayout mSwipyRefreshLayout;
     protected DemoApi demoApi;
-    private int pageNum = 0;
+    private int pageNum = 1;
     private boolean ispull = false;
-    private SharePreferenceUtils sp;
+    private String keyword;
 
-    public QiWenNewFragment() {
+    public WeiXinJinXFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static QiWenNewFragment newInstance() {
-        QiWenNewFragment fragment = new QiWenNewFragment();
+    public static WeiXinJinXFragment newInstance() {
+        WeiXinJinXFragment fragment = new WeiXinJinXFragment();
         return fragment;
     }
 
@@ -56,18 +54,14 @@ public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout
     protected void doFragmentHandler(Message msg) {
         super.doFragmentHandler(msg);
         switch (msg.what) {
-            case DemoApi.QIWENNEW://奇闻新闻
+            case DemoApi.WEIXINGJX://奇闻新闻
                 if (!ispull) {
-                    listData = (ArrayList<QiWenNew>) msg.obj;
+                    listData = (ArrayList<WEIXINGJX>) msg.obj;
                 } else {
-                    listData.addAll((ArrayList<QiWenNew>) msg.obj);
+                    listData.addAll((ArrayList<WEIXINGJX>) msg.obj);
                 }
-                DebugLogs.d("----->" + listData.size());
-                sp.putJokecount(pageNum);
                 adapter.addData(listData);
                 mSwipyRefreshLayout.setRefreshing(false);
-                break;
-            case DemoApi.FUNNYPIC:
                 break;
         }
     }
@@ -82,10 +76,12 @@ public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout
 
     private void initData() {
         demoApi = new DemoApi(getActivity(), fragmentHandler);
-        sp = SharePreferenceUtils.getmInstance(getActivity());
-        pageNum = sp.getJokeCount();
+        requestPermission(getActivity());
+        keyword = "杭州";
         getData();
     }
+
+
 
     private void initView(View rootView) {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
@@ -102,7 +98,7 @@ public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout
      */
     private void getData() {
         ispull = false;
-        demoApi.getQiWenNew(0);
+        demoApi.getWeixing(1,keyword);
     }
 
     @Override
@@ -115,7 +111,7 @@ public class QiWenNewFragment extends BaseFragment implements SwipyRefreshLayout
                 } else {
                     ispull = true;
                     pageNum++;
-                    demoApi.getQiWenNew(pageNum);
+                    demoApi.getWeixing(pageNum,keyword);
                 }
             }
         });

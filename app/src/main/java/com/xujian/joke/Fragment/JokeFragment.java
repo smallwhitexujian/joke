@@ -36,7 +36,7 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
     private RecyclerViewAdapter adapter;
     private SwipyRefreshLayout mSwipyRefreshLayout;
     protected DemoApi demoApi;
-    private int pageNum = 0;
+    private int pageNum = 1;
     private boolean ispull = false;
     private SharePreferenceUtils sp;
 
@@ -102,8 +102,8 @@ public class JokeFragment extends BaseFragment implements SwipyRefreshLayout.OnR
      */
     private void getJokeData() {
         ispull = false;
-        if (pageNum == 0) {
-            sp.putJokecount(0);
+        if (pageNum == 1) {
+            sp.putJokecount(1);
         }
         demoApi.getJoke(sp.getJokeCount());
     }

@@ -1,8 +1,16 @@
 package com.xujian.joke.Fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
@@ -19,7 +27,8 @@ import java.lang.reflect.Field;
  * Why & What is modified(修改原因):
  */
 public class BaseFragment extends Fragment {
-
+    private ClickPermission clickPermission;
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     public FragmentHandler fragmentHandler = new FragmentHandler(this);
 
     public static class FragmentHandler extends Handler {
@@ -51,5 +60,41 @@ public class BaseFragment extends Fragment {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void requestPermission(Context context){
+        //判断当前Activity是否已经获得了该权限
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            //如果App的权限申请曾经被用户拒绝过，就需要在这里跟用户做出解释
+            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) context,Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(context,"please give me the permission",Toast.LENGTH_SHORT).show();
+            } else {
+                //进行权限请求
+                ActivityCompat.requestPermissions((Activity) context,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){//执行权限
+                    clickPermission.hasPermission();
+                }else{//没有权限
+                    clickPermission.hasNoPermission();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    public interface ClickPermission{
+        void hasPermission();
+        void hasNoPermission();
     }
 }

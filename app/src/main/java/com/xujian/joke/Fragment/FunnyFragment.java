@@ -35,7 +35,7 @@ public class FunnyFragment extends BaseFragment implements SwipyRefreshLayout.On
     private funRecyclerViewAdapter adapter;
     private SwipyRefreshLayout mSwipyRefreshLayout;
     protected DemoApi demoApi;
-    private int pageNum = 0;
+    private int pageNum = 1;
     private boolean ispull = false;
 
     public FunnyFragment() {
@@ -94,7 +94,7 @@ public class FunnyFragment extends BaseFragment implements SwipyRefreshLayout.On
      */
     private void getFunnyData() {
         ispull = false;
-        demoApi.getFunnyPic(0);
+        demoApi.getFunnyPic(1);
     }
 
     @Override

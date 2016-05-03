@@ -15,13 +15,13 @@ import com.xujian.joke.Adapter.SectionsPagerAdapter;
 import com.xujian.joke.AppState;
 import com.xujian.joke.Fragment.FunnyFragment;
 import com.xujian.joke.Fragment.JokeFragment;
-import com.xujian.joke.Fragment.QiWenNewFragment;
+import com.xujian.joke.Fragment.WeiXinJinXFragment;
 import com.xujian.joke.R;
 
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
-    private String[] mTitle = {"笑话","搞笑图片","奇闻怪谈"};
+    private String[] mTitle = {"笑话","搞笑图片","微信精选"};
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
 
     @Override
@@ -64,10 +64,10 @@ public class MainActivity extends BaseActivity {
         }
         Fragment jokeFragment = JokeFragment.newInstance();
         Fragment funnyfragment = FunnyFragment.newInstance();
-        Fragment qiwenfragment = QiWenNewFragment.newInstance();
+        Fragment weiXinJinXfragment = WeiXinJinXFragment.newInstance();
         fragmentArrayList.add(jokeFragment);
         fragmentArrayList.add(funnyfragment);
-        fragmentArrayList.add(qiwenfragment);
+        fragmentArrayList.add(weiXinJinXfragment);
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),mTitle,fragmentArrayList);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         assert mViewPager != null;
