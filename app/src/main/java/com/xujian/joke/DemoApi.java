@@ -43,6 +43,7 @@ public class DemoApi {
     private String AF_QiWenNew = AF_NEWQIWEN + "?key=" + AF_key;
     private String AF_WeiXing = AF_WEIXING + "?key=9e56a82538414333a051f857237430f2";
     public static final int API = 0X88;
+    public static final int NON = API;
     public static final int JOKESUCCESS = API + 1;
     public static final int FUNNYPIC = API + 2;
     public static final int QIWENNEW = API + 3;
@@ -137,10 +138,14 @@ public class DemoApi {
                 if (!result.isEmpty()) {
                     CommonListModel<QiWenNew> commonModel = JsonUtil.fromJson(result, new TypeToken<CommonListModel<QiWenNew>>() {
                     }.getType());
-                    if (commonModel != null && commonModel.error_code.equals("0")) {
+                    if (commonModel != null && commonModel.error_code.equals("0") && commonModel.hasResult()) {
                         Message message = mHandler.obtainMessage();
                         message.what = QIWENNEW;
                         message.obj = commonModel.result;
+                        mHandler.sendMessage(message);
+                    }else{
+                        Message message = mHandler.obtainMessage();
+                        message.what = NON;
                         mHandler.sendMessage(message);
                     }
                 }
@@ -162,10 +167,14 @@ public class DemoApi {
                 if (!result.isEmpty()) {
                     CommonListModel<WEIXINGJX> commonModel = JsonUtil.fromJson(result, new TypeToken<CommonListModel<WEIXINGJX>>() {
                     }.getType());
-                    if (commonModel != null && commonModel.error_code.equals("0")) {
+                    if (commonModel != null && commonModel.error_code.equals("0") && commonModel.hasResult()) {
                         Message message = mHandler.obtainMessage();
                         message.what = WEIXINGJX;
                         message.obj = commonModel.result;
+                        mHandler.sendMessage(message);
+                    }else{
+                        Message message = mHandler.obtainMessage();
+                        message.what = NON;
                         mHandler.sendMessage(message);
                     }
                 }

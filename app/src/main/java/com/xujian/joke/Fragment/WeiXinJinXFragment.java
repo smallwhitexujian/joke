@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xj.utils.GpsTracker.GpsTracker;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;
 import com.xujian.joke.Adapter.QiWenNewAdapter;
@@ -63,6 +64,9 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
                 adapter.addData(listData);
                 mSwipyRefreshLayout.setRefreshing(false);
                 break;
+            case DemoApi.NON:
+                mSwipyRefreshLayout.setRefreshing(false);
+                break;
         }
     }
 
@@ -76,8 +80,12 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
 
     private void initData() {
         demoApi = new DemoApi(getActivity(), fragmentHandler);
-        requestPermission(getActivity());
-        keyword = "杭州";
+        GpsTracker gpsTracker = new GpsTracker(getActivity());
+        gpsTracker.getCity();
+        keyword = gpsTracker.getCity().split("市")[0];
+        if (keyword.isEmpty()){
+            keyword = "中国";
+        }
         getData();
     }
 

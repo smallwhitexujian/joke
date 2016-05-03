@@ -62,7 +62,8 @@ public class BaseFragment extends Fragment {
         }
     }
 
-    public void requestPermission(Context context){
+    public void requestPermission(Context context,ClickPermission clickPermission){
+        this.clickPermission = clickPermission;
         //判断当前Activity是否已经获得了该权限
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION)

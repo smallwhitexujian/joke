@@ -25,4 +25,8 @@ public class CommonListModel<T> extends CommonModel {
     public boolean hasData() {
         return data != null && data.size() > 0;
     }
+
+    public boolean hasResult() {
+        return result != null && result.size() > 0;
+    }
 }
