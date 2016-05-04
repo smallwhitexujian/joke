@@ -15,13 +15,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
-        /**
-         * 在这里加入aar文件夹的repo
-         */
-        flatDir {
-            dirs 'aar'
-        }
     }
 }
 

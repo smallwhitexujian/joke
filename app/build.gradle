@@ -12,17 +12,18 @@ android {
             keyPassword "xujian"
         }
     }
+
     defaultConfig {
         applicationId "com.xujian.joke"
         minSdkVersion 15
         targetSdkVersion 15
-        versionCode 1
+        versionCode 2
         versionName "1.2"
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
     }
-    buildTypes {
+    buildTypes {//打包不欧同类型的配置
         release {
             //混淆开关
             minifyEnabled true
@@ -35,6 +36,32 @@ android {
             //混淆配置文件
             proguardFiles  'proguard-rules.pro'
         }
+        debug{//调试版本
+            //混淆开关
+            minifyEnabled true
+            //是否zip对齐
+            zipAlignEnabled true
+            //是否打开debuggable开关
+            debuggable false
+            //是否打开jniDebuggable开关
+            jniDebuggable false
+            //混淆配置文件
+            proguardFiles  'proguard-rules.pro'
+        }
+    }
+    productFlavors {
+        dev {//开发版
+            applicationId "com.xujian.joke"
+            minSdkVersion  19
+        }
+        prod {//编译版
+            applicationId "com.xujian.joke"
+            minSdkVersion  15
+        }
+    }
+    //非必要部分，大内存机器可加入
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
