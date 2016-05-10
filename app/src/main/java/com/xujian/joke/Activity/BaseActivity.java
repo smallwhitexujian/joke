@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
+import com.umeng.analytics.MobclickAgent;
 import com.xujian.joke.DemoApi;
 
 import java.lang.ref.WeakReference;
@@ -66,6 +67,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
@@ -76,6 +78,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         //解决系统字体大小修改布局错乱的问题
         Resources resource = getResources();
         Configuration c = resource.getConfiguration();

@@ -42,6 +42,9 @@
             android:name="com.qq.e.ads.ADActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
         </activity>
+
+        <meta-data android:value="57317a93e0f55ab28a0012ba" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="应用宝" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>
