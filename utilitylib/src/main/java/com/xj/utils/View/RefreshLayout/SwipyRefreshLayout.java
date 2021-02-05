@@ -20,8 +20,6 @@ package com.xj.utils.View.RefreshLayout;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.support.v4.view.MotionEventCompat;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -33,6 +31,9 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 import android.widget.AbsListView;
+
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
 
 import com.xujian.utilitylib.R;
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DebugUtils;
+import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.xj.utils.Http.HttpManager;
@@ -15,6 +16,9 @@ import com.xujian.joke.Model.FunnyPic;
 import com.xujian.joke.Model.JokeModel;
 import com.xujian.joke.Model.QiWenNew;
 import com.xujian.joke.Model.WEIXINGJX;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -36,7 +40,7 @@ public class DemoApi {
     private static final String JH_FUNNYPIC = "http://japi.juhe.cn/joke/img/text.from";//聚合笑话地址
     private static final String AF_NEWQIWEN = "http://api.avatardata.cn/QiWenNews/Query";//阿凡达数据
     private static final String AF_WEIXING = "http://api.avatardata.cn/WxNews/Query";
-    private static final String JOKEAPI = "http://api.1-blog.com/biz/bizserver/xiaohua/list.do?size=20";//野笑话地址
+    private static final String JOKEAPI = "http://v.juhe.cn/joke/content/list.php?pagesize=20";//野笑话地址
 
     private String JH_Funny = JH_FUNNY + "?key=" + key;
     private String JH_FunnyPic = JH_FUNNYPIC + "?key=" + key;
@@ -71,19 +75,27 @@ public class DemoApi {
     }
 
     public void getJoke(int page) {
-        String joke = JOKEAPI + "&page=" + page;
+        String joke = JOKEAPI + "&page=" + page + "&sort=asc"
+                + "&key=" + key + "&time=1418816972";
         callBack = new HttpManager.CallBack() {
             @Override
             public void onSuccess(String result) {
+                Log.e("TAG,", result.toString());
                 if (!result.isEmpty()) {
-                    CommonListModel<JokeModel> models = JsonUtil.fromJson(result, new TypeToken<CommonListModel<JokeModel>>() {
-                    }.getType());
-                    if (models != null && models.status.equals("000000")) {
-                        Message message = mHandler.obtainMessage();
-                        message.what = JOKESUCCESS;
-                        message.obj = models.detail;
-                        mHandler.sendMessage(message);
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        if (jsonObject != null && jsonObject.optString("reason").equals("Success")) {
+                            CommonListModel<JokeModel> models = JsonUtil.fromJson(jsonObject.optString("result"), new TypeToken<CommonListModel<JokeModel>>() {
+                            }.getType());
+                            Message message = mHandler.obtainMessage();
+                            message.what = JOKESUCCESS;
+                            message.obj = models.data;
+                            mHandler.sendMessage(message);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+
                 }
             }
         };
@@ -91,7 +103,7 @@ public class DemoApi {
     }
 
     public void getFunny(int page) {
-        String FunnyPic = JH_Funny + "&page=" + page + "&pagesize=20&sort=desc&time=" + System.currentTimeMillis() / 1000;
+        String FunnyPic = JH_Funny + "&page=" + page + "&pagesize=20&sort=desc&time=1418816972";
         callBack = new HttpManager.CallBack() {
             @Override
             public void onSuccess(String result) {
@@ -106,6 +118,7 @@ public class DemoApi {
 
     /**
      * 获取最新的搞笑图片
+     *
      * @param page 页数
      */
     public void getFunnyPic(int page) {
@@ -114,7 +127,7 @@ public class DemoApi {
             @Override
             public void onSuccess(String result) {
                 if (!result.isEmpty()) {
-                    FunnyPic commonModel = JsonUtil.fromJson(result,FunnyPic.class);
+                    FunnyPic commonModel = JsonUtil.fromJson(result, FunnyPic.class);
                     if (commonModel != null && commonModel.error_code.equals("0")) {
                         Message message = mHandler.obtainMessage();
                         message.what = FUNNYPIC;
@@ -126,8 +139,10 @@ public class DemoApi {
         };
         HttpManager.Request(mContext, HttpManager.Method.GET, FunnyPic, callBack, null);
     }
+
     /**
      * 奇闻新闻
+     *
      * @param page 页数
      */
     public void getQiWenNew(int page) {
@@ -143,7 +158,7 @@ public class DemoApi {
                         message.what = QIWENNEW;
                         message.obj = commonModel.result;
                         mHandler.sendMessage(message);
-                    }else{
+                    } else {
                         Message message = mHandler.obtainMessage();
                         message.what = NON;
                         mHandler.sendMessage(message);
@@ -156,11 +171,12 @@ public class DemoApi {
 
     /**
      * 微信精选
-     * @param page 页数
+     *
+     * @param page    页数
      * @param keyword 关键字
      */
-    public void getWeixing(int page,String keyword) {
-        String WEIXING = AF_WeiXing + "&page=" + page + "&rows=20"+"&keyword="+ keyword;
+    public void getWeixing(int page, String keyword) {
+        String WEIXING = AF_WeiXing + "&page=" + page + "&rows=20" + "&keyword=" + keyword;
         callBack = new HttpManager.CallBack() {
             @Override
             public void onSuccess(String result) {
@@ -172,7 +188,7 @@ public class DemoApi {
                         message.what = WEIXINGJX;
                         message.obj = commonModel.result;
                         mHandler.sendMessage(message);
-                    }else{
+                    } else {
                         Message message = mHandler.obtainMessage();
                         message.what = NON;
                         mHandler.sendMessage(message);

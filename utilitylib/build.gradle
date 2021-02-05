@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -25,10 +25,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.squareup.okhttp3:okhttp:3.0.1'
-    compile 'com.squareup.okio:okio:1.5.0'
-    compile 'com.linsea:opendanmaku:1.0.0@aar'
-    compile 'com.android.support:support-v4:23.1.1'
-    compile files('libs/gson-2.6.2.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.squareup.okhttp3:okhttp:3.0.1'
+    implementation 'com.squareup.okio:okio:1.5.0'
+    implementation 'com.linsea:opendanmaku:1.0.0@aar'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    api files('libs/gson-2.6.2.jar')
 }

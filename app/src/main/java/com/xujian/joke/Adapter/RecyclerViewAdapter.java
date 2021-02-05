@@ -2,11 +2,13 @@ package com.xujian.joke.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.xj.frescolib.View.FrescoDrawee;
 import com.xj.utils.utils.DebugLogs;
@@ -61,20 +63,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ListItemViewHolder holder, final int position) {
-        holder.title.setText(mList.get(position).author);
+//        holder.title.setText(mList.get(position).author);
         holder.context.setText(mList.get(position).content);
-        if (!mList.get(position).picUrl.equals("")) {
-            holder.frescoDrawee.setVisibility(View.VISIBLE);
-            holder.frescoDrawee.setImageURI(mList.get(position).picUrl);
-            holder.frescoDrawee.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, PicViewActivity.class);
-                    intent.putExtra("url",mList.get(position).picUrl);
-                    mContext.startActivity(intent);
-                }
-            });
-        }
+//        if (!mList.get(position).picUrl.equals("")) {
+//            holder.frescoDrawee.setVisibility(View.VISIBLE);
+//            holder.frescoDrawee.setImageURI(mList.get(position).picUrl);
+//            holder.frescoDrawee.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(mContext, PicViewActivity.class);
+//                    intent.putExtra("url",mList.get(position).picUrl);
+//                    mContext.startActivity(intent);
+//                }
+//            });
+//        }
     }
 
 
@@ -92,13 +94,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ListItemViewHolder extends RecyclerView.ViewHolder {
         TextView context;
         TextView title;
-        FrescoDrawee frescoDrawee;
+        ImageView frescoDrawee;
 
         public ListItemViewHolder(View itemView) {
             super(itemView);
             context = (TextView) itemView.findViewById(R.id.jokeContent);
             title = (TextView) itemView.findViewById(R.id.jokeTitle);
-            frescoDrawee = (FrescoDrawee) itemView.findViewById(R.id.frescoView);
+            frescoDrawee = (ImageView) itemView.findViewById(R.id.frescoView);
         }
     }
 }

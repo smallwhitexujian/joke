@@ -1,12 +1,13 @@
 package com.xujian.joke.Activity;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.qq.e.ads.banner.ADSize;
 import com.qq.e.ads.banner.AbstractBannerADListener;
 import com.qq.e.ads.banner.BannerView;
@@ -64,10 +65,10 @@ public class MainActivity extends BaseActivity {
         }
         Fragment jokeFragment = JokeFragment.newInstance();
         Fragment funnyfragment = FunnyFragment.newInstance();
-        Fragment weiXinJinXfragment = WeiXinJinXFragment.newInstance();
+//        Fragment weiXinJinXfragment = WeiXinJinXFragment.newInstance();
         fragmentArrayList.add(jokeFragment);
         fragmentArrayList.add(funnyfragment);
-        fragmentArrayList.add(weiXinJinXfragment);
+//        fragmentArrayList.add(weiXinJinXfragment);
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),mTitle,fragmentArrayList);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
         assert mViewPager != null;

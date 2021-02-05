@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.HttpAuthHandler;
@@ -19,6 +17,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.xujian.joke.R;
 
@@ -58,7 +59,7 @@ public class WebActivity extends AppCompatActivity {
         //设置支持插件
         mWebView.getSettings().setPluginState(WebSettings.PluginState.ON);
         //设置允许访问文件数据
-        mWebView.getSettings().setAllowFileAccess(true);
+        mWebView.getSettings().setAllowFileAccess(false);
         //支持缩放
         mWebView.getSettings().setSupportZoom(true);
         //支持缓存

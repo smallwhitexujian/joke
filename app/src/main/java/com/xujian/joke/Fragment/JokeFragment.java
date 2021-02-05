@@ -2,11 +2,12 @@ package com.xujian.joke.Fragment;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;

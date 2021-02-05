@@ -2,16 +2,16 @@ package com.xujian.joke.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.xj.frescolib.View.FrescoDrawee;
 import com.xujian.joke.Activity.WebActivity;
-import com.xujian.joke.Model.QiWenNew;
 import com.xujian.joke.Model.WEIXINGJX;
 import com.xujian.joke.R;
 

@@ -3,7 +3,8 @@ package com.xujian.joke.Utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 
 import com.facebook.common.executors.CallerThreadExecutor;
 import com.facebook.common.references.CloseableReference;

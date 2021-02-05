@@ -50,7 +50,8 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
     public void set*(...);
     *** get*();
-}
+}  #保护注解
+     -keepattributes *Annotation*
 # Preserve all classes that have special context constructors, and the
 # constructors themselves.
 -keepclasseswithmembers class * {
@@ -109,10 +110,8 @@
 # removes such information by default, so configure it to keep all of it.
 
 # 豌豆荚
--keepattributes Signature
 -keep class com.wandoujia.ads.sdk.** { *; }
 -dontwarn com.wandoujia.ads.sdk.**
--keepattributes Signature
 -dontwarn android.support.**
 -dontwarn com.squareup.**
 -dontwarn okio.**

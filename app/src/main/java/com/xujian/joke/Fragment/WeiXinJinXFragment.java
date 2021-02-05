@@ -2,13 +2,13 @@ package com.xujian.joke.Fragment;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xj.utils.GpsTracker.GpsTracker;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayout;
 import com.xj.utils.View.RefreshLayout.SwipyRefreshLayoutDirection;
 import com.xujian.joke.Adapter.QiWenNewAdapter;
@@ -37,7 +37,7 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
     protected DemoApi demoApi;
     private int pageNum = 1;
     private boolean ispull = false;
-    private String keyword;
+    private String keyword = "中国";
 
     public WeiXinJinXFragment() {
     }
@@ -80,15 +80,8 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
 
     private void initData() {
         demoApi = new DemoApi(getActivity(), fragmentHandler);
-        GpsTracker gpsTracker = new GpsTracker(getActivity());
-        gpsTracker.getCity();
-        keyword = gpsTracker.getCity().split("市")[0];
-        if (keyword.isEmpty()){
-            keyword = "中国";
-        }
         getData();
     }
-
 
 
     private void initView(View rootView) {
@@ -106,7 +99,7 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
      */
     private void getData() {
         ispull = false;
-        demoApi.getWeixing(1,keyword);
+        demoApi.getWeixing(1, keyword);
     }
 
     @Override
@@ -119,7 +112,7 @@ public class WeiXinJinXFragment extends BaseFragment implements SwipyRefreshLayo
                 } else {
                     ispull = true;
                     pageNum++;
-                    demoApi.getWeixing(pageNum,keyword);
+                    demoApi.getWeixing(pageNum, keyword);
                 }
             }
         });

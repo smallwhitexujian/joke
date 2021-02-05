@@ -8,11 +8,10 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.xj.frescolib.View.FrescoDrawee
+    <ImageView
         android:id="@+id/picture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fresco:actualImageScaleType="fitCenter"
         android:visibility="gone"/>
 
     <com.xujian.joke.Utils.ImageTouchView

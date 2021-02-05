@@ -14,5 +14,6 @@ package com.xujian.joke.Model;
 public class CommonModel {
     public String status;
     public String error_code;
+    public String reason;
 
 }

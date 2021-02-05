@@ -16,6 +16,7 @@
 
 package com.xj.utils.View.RefreshLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -25,9 +26,10 @@ import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.support.v4.view.ViewCompat;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+
+import androidx.core.view.ViewCompat;
 
 /**
  * Private class created to work around issues with AnimationListeners being
@@ -49,6 +51,7 @@ class CircleImageView extends ImageView {
     private Animation.AnimationListener mListener;
     private int mShadowRadius;
 
+    @SuppressLint("WrongConstant")
     public CircleImageView(Context context, int color, final float radius) {
         super(context);
         final float density = getContext().getResources().getDisplayMetrics().density;
@@ -112,6 +115,7 @@ class CircleImageView extends ImageView {
     /**
      * Update the background color of the circle image view.
      */
+    @SuppressLint("ResourceType")
     public void setBackgroundColor(int colorRes) {
         if (getBackground() instanceof ShapeDrawable) {
             final Resources res = getResources();
